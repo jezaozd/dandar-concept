@@ -1,0 +1,53 @@
+/* One continuous entrance: the arch of the real room opens with the visitor's scroll. */
+.exhale{position:relative;background:var(--ink);color:var(--white);isolation:isolate}
+.exhale-stage{height:calc(100svh - 88px);min-height:620px;max-height:1040px;position:relative;overflow:hidden;background:var(--ink)}
+.exhale-portal{position:absolute;inset:6% 35% 21%;border-radius:50% 50% 0 0 / 33% 33% 0 0;overflow:hidden;margin:0;background:#837c60}
+.exhale-portal img{width:100%;height:100%;object-fit:cover;object-position:63% 50%;filter:saturate(.72)}
+.exhale-portal::after{content:"";position:absolute;inset:50% 0 0;background:linear-gradient(transparent,rgba(11,28,24,.75))}
+.exhale-portal figcaption{position:absolute;bottom:6%;left:6%;right:6%;z-index:1;font:400 clamp(46px,6vw,96px)/1.14 var(--serif);letter-spacing:-.035em;color:var(--white);opacity:0;text-align:center}
+.exhale h1{position:absolute;left:var(--gutter);right:var(--gutter);top:30%;display:flex;justify-content:space-between;align-items:baseline;font-size:clamp(120px,14.7vw,282px);line-height:1.12;letter-spacing:-.04em;pointer-events:none;z-index:2;max-width:none;color:var(--white)}
+.exhale h1 span{display:block}
+.exhale-footer{position:absolute;bottom:65px;left:var(--gutter);right:var(--gutter);display:grid;grid-template-columns:1fr 1fr auto;gap:35px;align-items:end;z-index:3;font-size:13px;line-height:1.7;color:var(--white)}
+.exhale-footer p span{color:#c6d6cb;font-size:12px}
+.exhale-invitation{text-align:center;color:#c6d6cb}
+.exhale-book{display:flex;align-items:center;gap:34px;padding:14px 0;border-bottom:1px solid #a9b9aa;font-size:12px;min-height:48px;white-space:nowrap;transition:border-color .25s}
+.exhale-book:hover{border-color:var(--white)}
+.exhale :focus-visible{outline-color:var(--white)}
+.exhale-scroll{position:absolute;bottom:22px;left:var(--gutter);display:flex;align-items:center;gap:12px;color:#c6d6cb;font-size:11px;line-height:1.5}
+.exhale-scroll span{width:35px;height:1px;background:#c6d6cb;transform-origin:left;transform:scaleX(.4)}
+@supports(animation-timeline:view()){
+ @media(prefers-reduced-motion:no-preference){
+  .exhale{height:185svh;view-timeline-name:--exhale;view-timeline-axis:block}
+  .exhale-stage{position:sticky;top:0}
+  .exhale-portal{animation:open-room 1s linear both;animation-timeline:--exhale;animation-range:contain 0% contain 86%}
+  .exhale h1 span:first-child{animation:release-left 1s linear both;animation-timeline:--exhale;animation-range:contain 0% contain 52%}
+  .exhale h1 span:last-child{animation:release-right 1s linear both;animation-timeline:--exhale;animation-range:contain 0% contain 52%}
+  .exhale-portal figcaption{animation:arrive-room 1s linear both;animation-timeline:--exhale;animation-range:contain 42% contain 82%}
+  .exhale-scroll span{animation:breath-line 1s linear both;animation-timeline:--exhale;animation-range:contain 0% contain 100%}
+ }
+}
+@keyframes open-room{from{inset:6% 35% 21%;border-radius:50% 50% 0 0 / 33% 33% 0 0}to{inset:0 0 21%;border-radius:0}}
+@keyframes release-left{0%{transform:none;opacity:1;filter:blur(0)}100%{transform:translateX(-40%);opacity:0;filter:blur(5px)}}
+@keyframes release-right{0%{transform:none;opacity:1;filter:blur(0)}100%{transform:translateX(40%);opacity:0;filter:blur(5px)}}
+@keyframes arrive-room{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes breath-line{from{transform:scaleX(.4)}to{transform:scaleX(1)}}
+@media(min-width:1800px){.exhale-stage{height:870px}}
+@media(max-width:767px){
+ .exhale-stage{height:calc(100svh - 140px);min-height:590px;max-height:900px}
+ .exhale-portal{inset:5% 17% 30%}
+ .exhale-portal::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(transparent 25%,rgba(23,60,54,.55) 44%,rgba(23,60,54,.55) 63%,transparent 83%)}
+ .exhale h1{top:31%;left:14px;right:14px;font-size:24.4vw;display:block;text-align:center;white-space:nowrap;line-height:1.3}
+ .exhale h1 span{display:inline-block}
+ .exhale-footer{bottom:50px;grid-template-columns:1fr;gap:17px;align-items:start;font-size:13px}
+ .exhale-footer p{line-height:1.65}
+ .exhale-invitation{display:none}
+ .exhale-book{justify-content:space-between;width:100%;padding:10px 0;min-height:44px}
+ .exhale-scroll{bottom:18px;font-size:11px}
+ .exhale-portal figcaption{font-size:clamp(40px,11vw,76px);bottom:8%;text-align:left}
+ @supports(animation-timeline:view()){@media(prefers-reduced-motion:no-preference){.exhale{height:155svh}.exhale-portal{animation-name:open-room-mobile}.exhale-portal::before{animation:release-backing 1s linear both;animation-timeline:--exhale;animation-range:contain 0% contain 52%}}}
+}
+@keyframes open-room-mobile{from{inset:5% 17% 30%;border-radius:50% 50% 0 0 / 33% 33% 0 0}to{inset:0 0 30%;border-radius:0}}
+@media(prefers-reduced-motion:reduce){.exhale-scroll{display:none}.exhale-footer{bottom:38px}}
+@media(forced-colors:active){.exhale{background:Canvas;color:CanvasText}.exhale h1,.exhale-footer{color:CanvasText}.exhale-portal{border:1px solid CanvasText}.exhale-book{border-bottom:1px solid LinkText}}
+
+@keyframes release-backing{from{opacity:1}to{opacity:0}}
